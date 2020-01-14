@@ -19,28 +19,51 @@ payoffs.
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    num_rounds = 1
+    num_rounds = 2
 
     instructions_template = 'prisoner/instructions.html'
 
+    # if high stakes
+
     # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = c(300)
-    betrayed_payoff = c(0)
+    high_betray_payoff = c(300)
+    high_betrayed_payoff = c(0)
 
     # payoff if both players cooperate or both defect
-    both_cooperate_payoff = c(200)
-    both_defect_payoff = c(100)
+    high_both_cooperate_payoff = c(200)
+    high_both_defect_payoff = c(100)
+
+    # if low stakes
+
+    # payoff if 1 player defects and the other cooperates""",
+    low_betray_payoff = c(30)
+    low_betrayed_payoff = c(0)
+
+    # payoff if both players cooperate or both defect
+    low_both_cooperate_payoff = c(20)
+    low_both_defect_payoff = c(10)
+    
+    default_stakes_high = True
 
 
 class Subsession(BaseSubsession):
-    pass
+    stakes_high = models.BooleanField(initial=Constants.default_stakes_high)
+
+    def set_stakes(self):
+        if self.round_number == 1:
+            pass
+        else:
+            for p in self.get_players():
+                if p.in_round(self.round_number - 1).decision == "Defect":
+                    self.stakes_high = 0
 
 
 class Group(BaseGroup):
+
     def set_payoffs(self):
+
         for p in self.get_players():
             p.set_payoff()
-
 
 class Player(BasePlayer):
     decision = models.StringField(
@@ -53,14 +76,25 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
-        payoff_matrix = dict(
-            Cooperate=dict(
-                Cooperate=Constants.both_cooperate_payoff,
-                Defect=Constants.betrayed_payoff,
-            ),
-            Defect=dict(
-                Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
-            ),
-        )
+        if self.subsession.stakes_high:
+            payoff_matrix = dict(
+                Cooperate=dict(
+                    Cooperate=Constants.high_both_cooperate_payoff,
+                    Defect=Constants.high_betrayed_payoff,
+                ),
+                Defect=dict(
+                    Cooperate=Constants.high_betray_payoff, Defect=Constants.high_both_defect_payoff
+                ),
+            )
+        else:
+            payoff_matrix = dict(
+                Cooperate=dict(
+                    Cooperate=Constants.low_both_cooperate_payoff,
+                    Defect=Constants.low_betrayed_payoff,
+                ),
+                Defect=dict(
+                    Cooperate=Constants.low_betray_payoff, Defect=Constants.low_both_defect_payoff
+                ),
+            )
 
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

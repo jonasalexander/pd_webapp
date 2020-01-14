@@ -14,7 +14,7 @@
         In this study, you will be randomly and anonymously paired with another
         participant.
         Each of you simultaneously and privately chooses whether you want to
-        cooperate or defect.
+        cooperate or defect ADD PART ABOUT TWO DIFFERENT GAMES.
         Your payoffs will be determined by the choices of both as below:
     </p>
     <p><i>In each cell, the amount to the left is the payoff for
@@ -30,17 +30,33 @@
             <th>Cooperate</th>
             <th>Defect</th>
         </tr>
+        {% if stakes_high %}
         <tr>
             <th rowspan=2><span style="transform: rotate(-90deg);">You</span></th>
             <th>Cooperate</th>
-            <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
-            <td>0, {{ Constants.betray_payoff }}</td>
+            <td>{{ Constants.high_both_cooperate_payoff }}, {{ Constants.high_both_cooperate_payoff }}</td>
+            <td>{{ Constants.high_betrayed_payoff }}, {{ Constants.high_betray_payoff }}</td>
         </tr>
         <tr>
             <th>Defect</th>
-            <td>{{ Constants.betray_payoff }}, 0</td>
-            <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
+            <td>{{ Constants.high_betray_payoff }}, {{ Constants.high_betrayed_payoff }}</td>
+            <td>{{ Constants.high_both_defect_payoff }}, {{ Constants.high_both_defect_payoff }}</td>
         </tr>
+        {% else %}
+        <tr>
+            <th rowspan=2><span style="transform: rotate(-90deg);">You</span></th>
+            <th>Cooperate</th>
+            <td>{{ Constants.low_both_cooperate_payoff }}, {{ Constants.low_both_cooperate_payoff }}</td>
+            <td>{{ Constants.low_betrayed_payoff }}, {{ Constants.low_betray_payoff }}</td>
+        </tr>
+        <tr>
+            <th>Defect</th>
+            <td>{{ Constants.low_betray_payoff }}, {{ Constants.low_betrayed_payoff }}</td>
+            <td>{{ Constants.low_both_defect_payoff }}, {{ Constants.low_both_defect_payoff }}</td>
+        </tr>
+        {% endif %}
+
+        
     </table>
 
 </div>
