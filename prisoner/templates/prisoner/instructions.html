@@ -10,12 +10,17 @@
     <link rel="stylesheet" type="text/css"
           href="{% static 'global/matrix.css' %}"/>
 
+    <h6> {% if stakes_high %} High {% else %} Low {% endif %} Stakes Game</h6>
+
     <p>
         In this study, you will be randomly and anonymously paired with another
         participant.
         Each of you simultaneously and privately chooses whether you want to
-        cooperate or defect ADD PART ABOUT TWO DIFFERENT GAMES.
-        Your payoffs will be determined by the choices of both as below:
+        cooperate or defect. In addition to determining your payoffs as outlined
+        below, if one of you defects, you will also be forced to play a low-stakes
+        game in the following rounds. You can only move back to the high-stakes game
+        after a round in which you both choose to cooperate. You will play a total 
+        of {{Constants.num_rounds}} rounds, all with the same other participant.
     </p>
     <p><i>In each cell, the amount to the left is the payoff for
         you and to the right for the other participant.</i></p>
