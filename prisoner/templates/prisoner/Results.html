@@ -16,7 +16,10 @@
     </p>
 
     <p>
-        As a result, you earned {{ player.payoff }}.
+        As a result, you earned {{ player.payoff }} 
+        {% if current_round < Constants.num_rounds %}
+        and will play the <em> {% if next_stakes_high %} high {% else %} low {% endif %} stakes </em> game next round
+        {% endif %}.
     </p>
 
     {% next_button %}
