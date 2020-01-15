@@ -10,36 +10,32 @@ from otree.api import (
 )
 
 doc = """
-This is a one-shot "Prisoner's Dilemma". Two players are asked separately
-whether they want to cooperate or defect. Their choices directly determine the
-payoffs.
+This is a repeated "Prisoner's Dilemma" with varying stakes. Two players are 
+asked separately whether they want to cooperate or defect. Their choices 
+directly determine the payoffs as well as the stakes for the next round.
 """
 
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    num_rounds = 2
+    num_rounds = 3
 
     instructions_template = 'prisoner/instructions.html'
 
-    # if high stakes
-
-    # payoff if 1 player defects and the other cooperates""",
+    # high stakes payoff if 1 player defects and the other cooperates""",
     high_betray_payoff = c(300)
     high_betrayed_payoff = c(0)
 
-    # payoff if both players cooperate or both defect
+    # high stakes payoff if both players cooperate or both defect
     high_both_cooperate_payoff = c(200)
     high_both_defect_payoff = c(100)
 
-    # if low stakes
-
-    # payoff if 1 player defects and the other cooperates""",
+    # low stakes payoff if 1 player defects and the other cooperates""",
     low_betray_payoff = c(30)
     low_betrayed_payoff = c(0)
 
-    # payoff if both players cooperate or both defect
+    # low stakes payoff if both players cooperate or both defect
     low_both_cooperate_payoff = c(20)
     low_both_defect_payoff = c(10)
     
@@ -53,6 +49,7 @@ class Subsession(BaseSubsession):
         if self.round_number == 1:
             pass
         else:
+            self.stakes_high = 1
             for p in self.get_players():
                 if p.in_round(self.round_number - 1).decision == "Defect":
                     self.stakes_high = 0
