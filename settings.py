@@ -17,6 +17,8 @@ SESSION_CONFIGS = [
 	app_sequence=['prisoner', 'payment_info']),
 ]
 
+environ["OTREE_AUTH_LEVEL"] = "STUDY"
+
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = 'en'
@@ -26,17 +28,13 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ROOMS = [
-    dict(name='gametheory',
-	display_name='Game Theory Experiment')
+    dict(name='pd_stakes',
+	display_name='Repeated PD with changing stakes based on past behavior')
 ]
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-
-DEMO_PAGE_INTRO_HTML = """
-Here are some oTree games.
-"""
 
 # don't share this with anybody.
 SECRET_KEY = 'm$$nd-ugg@5y)_v+8i($)2_ya5z!0rq=tvtplhim#=hml-8-@5'
