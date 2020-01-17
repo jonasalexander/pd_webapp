@@ -19,7 +19,7 @@ directly determine the payoffs as well as the stakes for the next round.
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    num_rounds = 3
+    num_rounds = 4
 
     instructions_template = 'prisoner/instructions.html'
 
