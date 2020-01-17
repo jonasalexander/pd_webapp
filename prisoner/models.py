@@ -16,6 +16,14 @@ directly determine the payoffs as well as the stakes for the next round.
 """
 
 
+class Payoffs():
+    def __init__(self, betray, betrayed, both_cooperate, both_defect):
+        self.betray = c(betray)
+        self.betrayed = c(betrayed)
+        self.both_cooperate = c(both_cooperate)
+        self.both_defect = c(both_defect)
+
+
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
@@ -23,36 +31,23 @@ class Constants(BaseConstants):
 
     instructions_template = 'prisoner/instructions.html'
 
-    # high stakes payoff if 1 player defects and the other cooperates""",
-    high_betray_payoff = c(300)
-    high_betrayed_payoff = c(0)
+    payoffs = {"high": Payoffs(betray=c(300), betrayed=c(0), both_cooperate=c(200), both_defect=c(100)),
+               "low": Payoffs(betray=c(30), betrayed=c(0), both_cooperate=c(20), both_defect=c(10))}
 
-    # high stakes payoff if both players cooperate or both defect
-    high_both_cooperate_payoff = c(200)
-    high_both_defect_payoff = c(100)
-
-    # low stakes payoff if 1 player defects and the other cooperates""",
-    low_betray_payoff = c(30)
-    low_betrayed_payoff = c(0)
-
-    # low stakes payoff if both players cooperate or both defect
-    low_both_cooperate_payoff = c(20)
-    low_both_defect_payoff = c(10)
-    
-    default_stakes_high = True
+    default_stakes = "high"
 
 
 class Subsession(BaseSubsession):
-    stakes_high = models.BooleanField(initial=Constants.default_stakes_high)
+    stakes = models.StringField(initial=Constants.default_stakes)
 
     def set_stakes(self):
         if self.round_number == 1:
             pass
         else:
-            self.stakes_high = 1
+            self.stakes = "high"
             for p in self.get_players():
                 if p.in_round(self.round_number - 1).decision == "Defect":
-                    self.stakes_high = 0
+                    self.stakes = "low"
 
 
 class Group(BaseGroup):
@@ -73,25 +68,14 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
-        if self.subsession.stakes_high:
-            payoff_matrix = dict(
-                Cooperate=dict(
-                    Cooperate=Constants.high_both_cooperate_payoff,
-                    Defect=Constants.high_betrayed_payoff,
-                ),
-                Defect=dict(
-                    Cooperate=Constants.high_betray_payoff, Defect=Constants.high_both_defect_payoff
-                ),
-            )
-        else:
-            payoff_matrix = dict(
-                Cooperate=dict(
-                    Cooperate=Constants.low_both_cooperate_payoff,
-                    Defect=Constants.low_betrayed_payoff,
-                ),
-                Defect=dict(
-                    Cooperate=Constants.low_betray_payoff, Defect=Constants.low_both_defect_payoff
-                ),
-            )
+        payoff_matrix = dict(
+            Cooperate=dict(
+                Cooperate=Constants.payoffs[self.subsession.stakes].both_cooperate,
+                Defect=Constants.payoffs[self.subsession.stakes].betrayed,
+            ),
+            Defect=dict(
+                Cooperate=Constants.payoffs[self.subsession.stakes].betray, Defect=Constants.payoffs[self.subsession.stakes].both_defect
+            ),
+        )
 
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

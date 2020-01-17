@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css"
           href="{% static 'global/matrix.css' %}"/>
 
-    <h6> {% if stakes_high %} High {% else %} Low {% endif %} Stakes Game</h6>
+    <h6> {{ stakes|title }} Stakes Game</h6>
 
     <p>
         In this study, you will be randomly and anonymously paired with another
@@ -35,33 +35,17 @@
             <th>Cooperate</th>
             <th>Defect</th>
         </tr>
-        {% if stakes_high %}
         <tr>
             <th rowspan=2><span style="transform: rotate(-90deg);">You</span></th>
             <th>Cooperate</th>
-            <td>{{ Constants.high_both_cooperate_payoff }}, {{ Constants.high_both_cooperate_payoff }}</td>
-            <td>{{ Constants.high_betrayed_payoff }}, {{ Constants.high_betray_payoff }}</td>
+            <td>{{payoffs.both_cooperate}}, {{payoffs.both_cooperate}}</td>
+            <td>{{payoffs.betrayed}}, {{payoffs.betray}}</td>
         </tr>
         <tr>
             <th>Defect</th>
-            <td>{{ Constants.high_betray_payoff }}, {{ Constants.high_betrayed_payoff }}</td>
-            <td>{{ Constants.high_both_defect_payoff }}, {{ Constants.high_both_defect_payoff }}</td>
+                <td>{{payoffs.betray}}, {{payoffs.betrayed}}</td>
+                <td>{{payoffs.both_defect}}, {{payoffs.both_defect}}</td>
         </tr>
-        {% else %}
-        <tr>
-            <th rowspan=2><span style="transform: rotate(-90deg);">You</span></th>
-            <th>Cooperate</th>
-            <td>{{ Constants.low_both_cooperate_payoff }}, {{ Constants.low_both_cooperate_payoff }}</td>
-            <td>{{ Constants.low_betrayed_payoff }}, {{ Constants.low_betray_payoff }}</td>
-        </tr>
-        <tr>
-            <th>Defect</th>
-            <td>{{ Constants.low_betray_payoff }}, {{ Constants.low_betrayed_payoff }}</td>
-            <td>{{ Constants.low_both_defect_payoff }}, {{ Constants.low_both_defect_payoff }}</td>
-        </tr>
-        {% endif %}
-
-        
     </table>
 
 </div>
