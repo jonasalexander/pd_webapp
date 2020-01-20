@@ -17,7 +17,7 @@
 
     <p>
         As a result, you earned {{ player.payoff }} 
-        {% if current_round < Constants.num_rounds %}
+        {% if not last_round %}
         and will play the <em> {{next_stakes}} stakes </em> game next round
         {% endif %}.
     </p>

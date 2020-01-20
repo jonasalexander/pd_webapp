@@ -27,7 +27,8 @@ class Payoffs():
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    num_rounds = 4
+    base_rounds = 20
+    num_rounds = base_rounds+25 #effectively max
 
     instructions_template = 'prisoner/instructions.html'
 
