@@ -46,7 +46,7 @@ class Results(Page):
     
     def app_after_this_page(self, upcoming_apps):
         if self.round_number == self.session.vars["num_rounds"]:
-            return "payment_info"
+            return "survey"
 
 
 page_sequence = [Introduction, Decision, ResultsWaitPage, Results]

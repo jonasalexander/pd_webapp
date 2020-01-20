@@ -14,7 +14,7 @@ SESSION_CONFIGS = [
     dict(name='prisoner',
 	display_name="Prisoner's Dilemma", 
 	num_demo_participants=2,
-	app_sequence=['prisoner', 'payment_info']),
+	app_sequence=['prisoner', 'survey', 'payment_info']),
 ]
 
 environ["OTREE_AUTH_LEVEL"] = "STUDY"
