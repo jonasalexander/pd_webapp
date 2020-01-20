@@ -17,6 +17,25 @@ class Introduction(Page):
             payoffs=Constants.payoffs[self.subsession.stakes])
 
 
+class ComprehensionCheck(Page):
+    form_model = 'player'
+    form_fields = ['compr_q1', 'compr_q2', 'compr_q3']
+
+    def is_displayed(self):
+        return self.round_number == 1
+        # only display if first round
+
+    def error_message(self, values):
+        if (values['compr_q1'] != Constants.compr_q1_opts[0]
+           or values['compr_q2'] != Constants.compr_q2_opts[0]
+           or values['compr_q3'] != Constants.compr_q3_opts[0]):
+            return "One or more answers incorrect"
+
+    def vars_for_template(self):
+        return dict(stakes=self.subsession.stakes,
+            payoffs=Constants.payoffs[self.subsession.stakes])
+
+
 class Decision(Page):
     form_model = 'player'
     form_fields = ['decision']
@@ -49,4 +68,4 @@ class Results(Page):
             return "survey"
 
 
-page_sequence = [Introduction, Decision, ResultsWaitPage, Results]
+page_sequence = [Introduction, ComprehensionCheck, Decision, ResultsWaitPage, Results]

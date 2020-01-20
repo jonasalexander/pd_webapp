@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from random import sample
 
 doc = """
 This is a repeated "Prisoner's Dilemma" with varying stakes. Two players are 
@@ -37,6 +38,13 @@ class Constants(BaseConstants):
 
     default_stakes = "high"
 
+    compr_q1_opts = ['High and low stakes', 'Multi- and single-player', 'Simple and complicated', 'Short and long']
+
+    compr_q2_opts = ['At least 20 rounds, maybe more', '0-9 rounds', '0-5 minutes', '6-10 minutes', '10-19 rounds']
+
+    compr_q3_opts = ['The next round is the low, not high stakes version', 'I lose, the game is over', 
+        'The next round is the single, not multi-player version', 'The next round is the long, not short version']
+
 
 class Subsession(BaseSubsession):
     stakes = models.StringField(initial=Constants.default_stakes)
@@ -64,6 +72,25 @@ class Player(BasePlayer):
         doc="""This player's decision""",
         widget=widgets.RadioSelect,
     )
+
+    compr_q1 = models.StringField(
+        choices=[[a]*2 for a in sample(Constants.compr_q1_opts, len(Constants.compr_q1_opts))],
+        label='What are the two types of games you will be asked to be played?',
+        widget=widgets.RadioSelect
+    )
+
+    compr_q2 = models.StringField(
+        choices=[[a]*2 for a in sample(Constants.compr_q2_opts, len(Constants.compr_q2_opts))],
+        label='For how long will you be playing the game?',
+        widget=widgets.RadioSelect
+    )
+
+    compr_q3 = models.StringField(
+        choices=[[a]*2 for a in sample(Constants.compr_q3_opts, len(Constants.compr_q3_opts))],
+        label='What happens if you or the other participant you are paired with defects?',
+        widget=widgets.RadioSelect
+    )
+
 
     def other_player(self):
         return self.get_others_in_group()[0]
