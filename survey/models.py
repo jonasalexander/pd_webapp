@@ -9,6 +9,11 @@ from otree.api import (
     currency_range,
 )
 
+doc="""
+This application asks demographic questions
+and follow-ups to the prisoner's dilemma experiment
+"""
+
 
 class Constants(BaseConstants):
     name_in_url = 'survey'
