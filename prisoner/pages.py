@@ -2,6 +2,15 @@ from ._builtin import Page, WaitPage
 from otree.api import Currency as c, currency_range
 from .models import Constants
 from numpy.random import geometric
+from captcha.fields import ReCaptchaField
+
+
+class PairingWaitPage(WaitPage):
+    group_by_arrival_time = True
+
+    def is_displayed(self):
+        return self.round_number == 1
+
 
 class Introduction(Page):
     timeout_seconds = 100
@@ -68,4 +77,4 @@ class Results(Page):
             return "survey"
 
 
-page_sequence = [Introduction, ComprehensionCheck, Decision, ResultsWaitPage, Results]
+page_sequence = [PairingWaitPage, Introduction, ComprehensionCheck, Decision, ResultsWaitPage, Results]

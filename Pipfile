@@ -9,6 +9,7 @@ verify_ssl = true
 otree = "*"
 psycopg2-binary = "*"
 numpy = "*"
+django-recaptcha = "*"
 
 [requires]
 python_version = "3.7"

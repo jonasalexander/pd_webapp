@@ -14,7 +14,7 @@ SESSION_CONFIGS = [
     dict(name='prisoner',
 	display_name="Prisoner's Dilemma", 
 	num_demo_participants=2,
-	app_sequence=['prisoner', 'survey', 'payment_info']),
+	app_sequence=['validation', 'prisoner', 'survey', 'payment_info']),
 ]
 
 environ["OTREE_AUTH_LEVEL"] = "STUDY"
@@ -36,8 +36,12 @@ ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
+RECAPTCHA_PUBLIC_KEY = environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = environ.get('RECAPTCHA_PRIVATE_KEY')
+NOCAPTCHA = True
+
 # don't share this with anybody.
 SECRET_KEY = 'm$$nd-ugg@5y)_v+8i($)2_ya5z!0rq=tvtplhim#=hml-8-@5'
 
-INSTALLED_APPS = ['otree']
+INSTALLED_APPS = ['otree', 'captcha']
 
