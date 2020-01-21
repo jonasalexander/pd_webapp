@@ -6,6 +6,9 @@ from captcha.fields import ReCaptchaField
 
 
 class PairingWaitPage(WaitPage):
+    title_text = "Please Wait"
+    body_text = "Waiting to pair you with the next available participant..."
+
     group_by_arrival_time = True
 
     def is_displayed(self):
@@ -55,6 +58,10 @@ class Decision(Page):
 
 
 class ResultsWaitPage(WaitPage):
+    title_text = "Please Wait"
+    body_text = "Waiting for the other participant to finish..."
+
+
     after_all_players_arrive = 'set_payoffs'
 
 
