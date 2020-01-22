@@ -6,13 +6,24 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01, participation_fee=0.00, doc=""
+    real_world_currency_per_point=0.01, participation_fee=0.00, doc="",
+    mturk_hit_settings=dict(
+        keywords='bonus, study',
+        title='Repeated PD with changing stakes based on past behavior',
+        description='Play PD 20+ times with the same partner, with low stakes if someone defected in the last round, else high stakes. Start with high stakes.',
+        frame_height=500,
+        template='global/mturk_template.html',
+        minutes_allotted_per_assignment=60,
+        expiration_hours=7 * 24,
+        qualification_requirements=[{'QualificationTypeId': "YOUR_QUALIFICATION_ID_HERE",'Comparator': "DoesNotExist", 'ActionsGuarded': "PreviewAndAccept"}],
+        grant_qualification_id='YOUR_QUALIFICATION_ID_HERE', # to prevent retakes
+    )
 )
 
 
 SESSION_CONFIGS = [
-    dict(name='prisoner',
-	display_name="Prisoner's Dilemma", 
+    dict(name='pd_changing_stakes',
+	display_name="Repeated PD with changing stakes based on past behavior", 
 	num_demo_participants=2,
 	app_sequence=['validation', 'prisoner', 'survey', 'payment_info']),
 ]
