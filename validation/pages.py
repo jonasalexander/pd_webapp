@@ -27,14 +27,15 @@ class Introduction(Page):
 
 class ComprehensionCheck(Page):
     form_model = 'player'
-    form_fields = ['compr_q1', 'compr_q2', 'compr_q3', 'compr_q4', 'compr_q5']
+    form_fields = ['compr_q1', 'compr_q2', 'compr_q3', 'compr_q4', 'compr_q5', 'compr_q6']
 
     def error_message(self, values):
         if (values['compr_q1'] != Constants.compr_q1_opts[0]
            or values['compr_q2'] != Constants.compr_q2_opts[0]
            or values['compr_q3'] != Constants.compr_q3_opts[0]
            or values['compr_q4'] != Constants.compr_q4_opts[0]
-           or values['compr_q5'] != Constants.compr_q5_opts[0]):
+           or values['compr_q5'] != Constants.compr_q5_opts[0]
+           or values['compr_q6'] != Constants.compr_q6_opts[0]):
             self.player.num_failures += 1
             return "One or more answers incorrect"
 

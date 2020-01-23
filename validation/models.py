@@ -44,6 +44,9 @@ class Constants(BaseConstants):
     compr_q5_opts = ['If I and the other worker both choose to cooperate', 'Wait 3 rounds and it happens automatically',
     'Trick question, there are no low and high stakes versions']
 
+    compr_q6_opts = ['I get 200, the other worker gets 200 points', 'I get 300, the other worker gets 0 points', 
+    'I get 200, the other worker gets 300 points', 'I get 0, the other worker gets 200 points']
+
 class Subsession(BaseSubsession):
     pass
 
@@ -81,5 +84,11 @@ class Player(BasePlayer):
     compr_q5 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q5_opts, len(Constants.compr_q5_opts))],
         label='How do you get from the low stakes game back into the high stakes version?',
+        widget=widgets.RadioSelect
+    )
+
+    compr_q6 = models.StringField(
+        choices=[[a]*2 for a in sample(Constants.compr_q6_opts, len(Constants.compr_q6_opts))],
+        label='If you and the other worker are playing the high stakes version and both choose to cooperate, what are your rewards?',
         widget=widgets.RadioSelect
     )
