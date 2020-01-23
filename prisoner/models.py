@@ -22,7 +22,7 @@ directly determine the payoffs as well as the stakes for the next round.
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    base_rounds = 1
+    base_rounds = 20
     num_rounds = base_rounds+25 #effectively max
 
     payoffs_template = 'prisoner/payoffs.html'
