@@ -1,0 +1,47 @@
+{% load otree %}
+{% block content %}
+
+    <div class="card bg-light m-3">
+        <div class="card-body">
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'global/matrix.css' %}"/>
+
+        <p>In this HIT, you are matched with another worker who is also this HIT. 
+        You will interact with this same worker for the entire task.
+        All interactions take place in real time.</p>
+
+        <p style="text-align: center"><strong>Please be considerate of the worker's time!</strong></p>
+
+        <p>In this task, there are multiple rounds. In each round, you face a simple
+        decision: You can either <strong>Cooperate</strong> or <strong>Defect</strong>. 
+        Whether you choose to cooperate or defect affects both your payoffs and 
+        those of the worker you've been paired with. You will only be able to see
+        the other worker's decision after you have submitted yours.</p>
+
+        <p> Furthermore, each round can be either <strong>High</strong> or 
+        <strong>Low</strong> stakes. In the high stakes version, the bonus payoffs 
+        are considerably higher (see below for exact numbers). 1 point is
+        worth $0.01.</p>
+
+        <p>In the first round, you will start off in the {{Constants.default_stakes}}
+        stakes game. In each subsequent round, you will play the high stakes game
+        if you both chose to cooperate in the previous round. Otherwise you will 
+        play the low stakes version. In other words, if one of you chose to defect
+        in the previous round, you will play the low stakes version in the
+        next round.</p>
+
+        <p>There will be at least 20 rounds of the group task. After the 20th
+        round, there will be a 50% chance that another round will follow. After
+        that round, there will again be a 50% chance that another round will follow,
+        and so on, until the group task ends. When the group task is over, you will
+        see a brief questionnaire before you can submit the HIT.</p>
+
+        </div>
+    </div>
+
+    {% for stake in all_stakes %}
+        {% include Constants.payoffs_template with stakes=stake.0 payoffs=stake.1 %}
+    {% endfor %}
+
+{% endblock %}

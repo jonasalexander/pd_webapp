@@ -3,27 +3,11 @@
 <div class="card bg-light m-3">
     <div class="card-body">
 
-    <h3>
-        Instructions
-    </h3>
-
     <link rel="stylesheet" type="text/css"
           href="{% static 'global/matrix.css' %}"/>
 
-    <h6> {{ stakes|title }} Stakes Game</h6>
+    <h3> {{ stakes|title }} Stakes Game</h3>
 
-    <p>
-        In this study, you will be randomly and anonymously paired with another
-        participant.
-        Each of you simultaneously and privately chooses whether you want to
-        cooperate or defect. In addition to determining your payoffs as outlined
-        below, if one of you defects, you will also be forced to play a low-stakes
-        game in the following rounds. You can only move back to the high-stakes game
-        after a round in which you both choose to cooperate. You will play at least
-        {{Constants.base_rounds}} rounds and after that will continue playing each
-        additional round with 50% probability. You will be paired with the same
-        other participants for all rounds.
-    </p>
     <p><i>In each cell, the amount to the left is the payoff for
         you and to the right for the other participant.</i></p>
 

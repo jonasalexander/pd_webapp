@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <div class="card bg-light m-3">
+        <div class="card-body">
+            <p>
+                Please answer the following questions. The instructions
+                are duplicated below in case you forgot the answer to a question or
+                would like to re-read the instructions.
+            </p>
+        </div>
+    </div>
+
+    {% formfields %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_template with all_stakes=all_stakes %}
+
+{% endblock %}
