@@ -35,6 +35,7 @@ class ComprehensionCheck(Page):
            or values['compr_q3'] != Constants.compr_q3_opts[0]
            or values['compr_q4'] != Constants.compr_q4_opts[0]
            or values['compr_q5'] != Constants.compr_q5_opts[0]):
+            self.player.num_failures += 1
             return "One or more answers incorrect"
 
     def vars_for_template(self):

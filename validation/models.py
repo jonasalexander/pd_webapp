@@ -51,12 +51,12 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    captcha = models.StringField(blank=True)
-    # tbh not sure why I need this
+    captcha = models.StringField(blank=True) # tbh not sure why I need this
+    num_failures = models.IntegerField(initial=0)
 
     compr_q1 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q1_opts, len(Constants.compr_q1_opts))],
-        label='What are the two types of games you will be asked to be played?',
+        label='What are the two types of games you will play?',
         widget=widgets.RadioSelect
     )
 
@@ -68,7 +68,7 @@ class Player(BasePlayer):
 
     compr_q3 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q3_opts, len(Constants.compr_q3_opts))],
-        label='What is the chance that there will be another round after the 21stx round?',
+        label='What is the chance that there will be another round after the 21st round?',
         widget=widgets.RadioSelect
     )
 
