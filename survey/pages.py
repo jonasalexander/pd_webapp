@@ -6,7 +6,7 @@ from .models import Constants
 
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['age', 'gender', 'income', 'education', 'pd_familiarity', 'english_first_language', 'feedback']
+    form_fields = ['age', 'gender', 'income', 'education', 'pd_familiarity', 'english_native_language', 'feedback']
 
     def vars_for_template(self):
         return(dict(timed_out=(self.session.vars['timed_out']==self.participant.id)))
