@@ -25,7 +25,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    payoffs_template = '../../prisoner/templates/prisoner/payoffs.html'
+    payoffs_template = 'validation/payoffs.html'
     instructions_template = 'validation/instructions.html'
 
     default_stakes = p.default_stakes

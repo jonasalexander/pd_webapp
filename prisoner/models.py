@@ -25,8 +25,6 @@ class Constants(BaseConstants):
     base_rounds = 20
     num_rounds = base_rounds+25 #effectively max
 
-    payoffs_template = 'prisoner/payoffs.html'
-
     payoffs = p.payoffs
 
     default_stakes = p.default_stakes
