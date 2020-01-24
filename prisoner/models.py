@@ -12,6 +12,7 @@ from random import sample
 import sys
 sys.path.insert(1, '../')
 import payoffs as p
+from numpy.random import geometric
 
 doc = """
 This is a repeated "Prisoner's Dilemma" with varying stakes. Two players are 
@@ -45,10 +46,18 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    def set_payoffs(self):
+    def set_vars(self):
+        if "num_rounds" not in self.session.vars:
+            self.session.vars["num_rounds"] = min(geometric(0.5)+Constants.base_rounds-1, Constants.num_rounds)
+            # -1 because of geometric vs first success definition
 
-        for p in self.get_players():
-            p.set_payoff()
+        self.session.vars['timed_out'] = False
+
+
+    def set_payoffs(self):
+        if not self.session.vars['timed_out']:
+            for p in self.get_players():
+                p.set_payoff()
 
 class Player(BasePlayer):
     decision = models.StringField(

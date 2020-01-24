@@ -8,6 +8,9 @@ class Demographics(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'income', 'education', 'pd_familiarity', 'feedback']
 
+    def vars_for_template(self):
+        return(dict(timed_out=(self.session.vars['timed_out']==self.participant.id)))
+
 class CognitiveReflectionTest(Page):
     form_model = 'player'
     form_fields = ['crt_bat', 'crt_widget', 'crt_lake']

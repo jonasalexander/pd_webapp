@@ -2,45 +2,64 @@
 {% load otree %}
 
 {% block title %}
-    Results
+    {% if not group_timed_out %}
+        Results
+    {% else %}
+        Time Out
+    {% endif %}
 {% endblock %}
 
+
 {% block content %}
+    {% if not group_timed_out %}
 
-    <div class="card bg-light m-3">
-        <div class="card-body">
-            <p>
-                {% if same_choice %}
-                    Both of you chose to {{ my_decision }}.
-                {% else %}
-                    You chose to {{ my_decision }} and the other worker chose to {{ opponent_decision }}.
-                {% endif %}
+        <div class="card bg-light m-3">
+            <div class="card-body">
+                <p>
+                    {% if same_choice %}
+                        Both of you chose to {{ my_decision }}.
+                    {% else %}
+                        You chose to {{ my_decision }} and the other worker chose to {{ opponent_decision }}.
+                    {% endif %}
+                </p>
+
+                <p>
+                    As a result, you earned a bonus of {{ player.payoff }} in this round.
+                    {% if not last_round %}
+                        You will play the <em>{{next_stakes}}</em> stakes game next round.</p>
+                    {% endif %}
+                </p>
+           </div>
+        </div>
+
+        {% if last_round %}
             </p>
+            <h2 style="padding-top:0.5em">Thank you for playing!</h2>
+            <p>You just finished playing the last round in the game.</p>
+            <p>In every game, there are at least {{Constants.base_rounds}} rounds. 
+            After that, another round is played with a 50% probability. And after 
+            that, yet another round is played with a 50% probability and so on.
+            The random generator took this into account and determined a
+            maximum length of {{num_rounds}} for your group. You just 
+            finished with the {{round_str}} round and you can now claim your bonus</p>
+            <p><strong>Please finish the survey to receive your completion payment
+            and bonus.</strong> Your bonus is the number of points that you
+            accumulated over all rounds, with 1 point worth $0.01.</p>
+        {% endif %}
+        {% next_button %}
 
-            <p>
-                As a result, you earned a bonus of {{ player.payoff }} in this round.
-                {% if not last_round %}
-                    You will play the <em>{{next_stakes}}</em> stakes game next round.</p>
-                {% endif %}
-            </p>
-       </div>
-    </div>
+    {% else %}
+        {% if not self_timed_out %}
+            <p>Your partner timed out. You will receive your bonus.</p>
 
-    {% if last_round %}
-        </p>
-        <h2 style="padding-top:0.5em">Thank you for playing!</h2>
-        <p>You just finished playing the last round in the game.</p>
-        <p>In every game, there are at least {{Constants.base_rounds}} rounds. 
-        After that, another round is played with a 50% probability. And after 
-        that, yet another round is played with a 50% probability and so on.
-        The random generator took this into account and determined a
-        maximum length of {{num_rounds}} for your group. You just 
-        finished with the {{round_str}} round and you can now claim your bonus</p>
-        <p><strong>Please finish the survey to receive your completion payment
-        and bonus.</strong> Your bonus is the number of points that you
-        accumulated over all rounds, with 1 point worth $0.01.</p>
+            <p><strong>Please finish the survey to receive your completion payment
+            and bonus.</strong> Your bonus is the number of points that you
+            accumulated over all rounds, with 1 point worth $0.01.</p>
+
+            {% next_button %}
+        {% else %}
+            <p>You will not receive any payment. The HIT will remain uncompleted.</p>
+        {% endif %}
+
     {% endif %}
-
-    {% next_button %}
-
 {% endblock %}

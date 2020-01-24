@@ -2,17 +2,24 @@
 {% load otree %}
 
 {% block title %}
-    Survey
+    {% if timed_out %}
+        HIT Expired
+    {% else %}
+        Survey
+    {% endif %}
 {% endblock %}
 
 {% block content %}
+    {% if timed_out %}
+        <p> You timed out. </p>
+    {% else %}
+        <p>
+            Please answer the following questions.
+        </p>
 
-    <p>
-        Please answer the following questions.
-    </p>
+        {% formfields %}
 
-    {% formfields %}
-
-    {% next_button %}
+        {% next_button %}
+    {% endif %}
 
 {% endblock %}

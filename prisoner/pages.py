@@ -1,8 +1,17 @@
 from ._builtin import Page, WaitPage
 from otree.api import Currency as c, currency_range
 from .models import Constants
-from numpy.random import geometric
 from captcha.fields import ReCaptchaField
+
+
+class LimitedTimePage(Page):
+    timeout_seconds = 30
+
+    def before_next_page(self):
+        if self.timeout_happened and not self.session.vars['timed_out']:
+            self.session.vars['timed_out'] = self.participant.id
+            for m in self.player.in_rounds(1, self.round_number):
+                m.payoff = 0
 
 
 class PairingWaitPage(WaitPage):
@@ -14,15 +23,12 @@ class PairingWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == 1
 
+    after_all_players_arrive = 'set_vars'
 
-class Decision(Page):
+
+class Decision(LimitedTimePage):
     form_model = 'player'
     form_fields = ['decision']
-
-    def before_next_page(self):
-        if "num_rounds" not in self.session.vars:
-            self.session.vars["num_rounds"] = min(geometric(0.5)+Constants.base_rounds-1, Constants.num_rounds)
-            # -1 because of geometric vs first success definition
 
     def vars_for_template(self):
         self.subsession.set_stakes()
@@ -34,11 +40,11 @@ class ResultsWaitPage(WaitPage):
     title_text = "Please Wait"
     body_text = "Waiting for the other participant to finish..."
 
-
     after_all_players_arrive = 'set_payoffs'
 
 
-class Results(Page):
+class Results(LimitedTimePage):
+
     def vars_for_template(self):
         me = self.player
         opponent = me.other_player()
@@ -64,11 +70,14 @@ class Results(Page):
             next_stakes=next_stakes,
             last_round=last_round,
             num_rounds=self.session.vars["num_rounds"],
-            round_str=round_str
+            round_str=round_str,
+            group_timed_out=self.session.vars['timed_out'],
+            self_timed_out=(self.participant.id == self.session.vars['timed_out'])
         )
     
     def app_after_this_page(self, upcoming_apps):
-        if self.round_number == self.session.vars["num_rounds"]:
+        if (self.round_number == self.session.vars["num_rounds"]
+            or self.session.vars['timed_out']):
             return "survey"
 
 page_sequence = [PairingWaitPage, Decision, ResultsWaitPage, Results]
