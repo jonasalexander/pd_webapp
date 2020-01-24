@@ -15,7 +15,12 @@ SESSION_CONFIG_DEFAULTS = dict(
         template='global/mturk_template.html',
         minutes_allotted_per_assignment=60,
         expiration_hours=7 * 24,
-        qualification_requirements=[],#{'QualificationTypeId': "YOUR_QUALIFICATION_ID_HERE",'Comparator': "DoesNotExist", 'ActionsGuarded': "PreviewAndAccept"}],
+        qualification_requirements=[{'QualificationTypeId': "00000000000000000071",
+                                    'Comparator': "EqualTo",
+                                    'LocaleValues': [{'Country': "US"}]},]
+                                    #{'QualificationTypeId': "YOUR_QUALIFICATION_ID_HERE",
+                                    #'Comparator': "DoesNotExist", 
+                                    #'ActionsGuarded': "PreviewAndAccept"}]
         #grant_qualification_id='YOUR_QUALIFICATION_ID_HERE', # to prevent retakes
     )
 )
