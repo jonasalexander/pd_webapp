@@ -28,6 +28,8 @@ class Constants(BaseConstants):
     pd_familiarity_options = ['I had never heard of it', 'That phrase seems familiar, but I didn\'t really know what it is',
         'I knew what it is', 'I had played it before, but rarely (less than 5)', 'I had played it before, a few times (5-10)',
         'I had played it before, many times (11+)']
+
+    english_first_language_options = ['Yes', 'No']
  
 
 class Subsession(BaseSubsession):
@@ -63,6 +65,12 @@ class Player(BasePlayer):
     pd_familiarity = models.StringField(
         choices=[[a]*2 for a in Constants.pd_familiarity_options],
         label='How familiar were you with the Prisoner\'s Dilemma game before this experiment?',
+        widget=widgets.RadioSelect
+    )
+
+    english_first_language = models.StringField(
+        choices=[[a]*2 for a in Constants.english_first_language_options],
+        label='Is English your first language?',
         widget=widgets.RadioSelect
     )
 
