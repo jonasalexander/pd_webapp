@@ -23,12 +23,10 @@ class Constants(BaseConstants):
     gender_options = ['Male', 'Female', 'Non-binary/third gender', 'Other', 'Prefer not to answer']
     income_options = ['$0-10,000', '$10,001-30,000', '$30,001-50,000', '$50,001-80,000', 
         '$80,001-120,000', '$120,001 and above']
-    ethnicity_options = ['Native American Indian or Alaska Native', 'Asian', 'Black of African American', 
-        'Native Hawaiian or Other Pacific Islander', 'White', 'Unknown', 'Do not wish to answer']
     education_options = ['No formal education', 'High school diploma', 'College degree', 'Vocational training',
         'Bachelor\'s degree', 'Master\'s degree', 'Professional degree', 'Doctorate degree', 'Other']
     pd_familiarity_options = ['I had never heard of it', 'That phrase seems familiar, but I didn\'t really know what it is',
-        'I knew what it is in theory', 'I had played it before, but rarely (<5)', 'I had played it before, a few times (5-10)',
+        'I knew what it is', 'I had played it before, but rarely (less than 5)', 'I had played it before, a few times (5-10)',
         'I had played it before, many times (11+)']
  
 
@@ -56,12 +54,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    ethnicity = models.StringField(
-        choices=[[a]*2 for a in Constants.ethnicity_options],
-        label='What is your ethnicity?',
-        widget=widgets.RadioSelect
-    )
-
     education = models.StringField(
         choices=[[a]*2 for a in Constants.education_options],
         label='What is your highest level of education?',
@@ -70,7 +62,7 @@ class Player(BasePlayer):
 
     pd_familiarity = models.StringField(
         choices=[[a]*2 for a in Constants.pd_familiarity_options],
-        label='How familiar were you with Prisoner\'s Dilemma games before this experiment?',
+        label='How familiar were you with the Prisoner\'s Dilemma game before this experiment?',
         widget=widgets.RadioSelect
     )
 
