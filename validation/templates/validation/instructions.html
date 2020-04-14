@@ -42,7 +42,9 @@
     </div>
 
     {% for stake in all_stakes %}
-        {% include Constants.payoffs_template with stakes=stake.0 payoffs=stake.1 %}
+        {% include Constants.payoffs_template with stakes=stake.0 payoffs=stake.1 is_ex=False rand_ex=rand_ex %}
     {% endfor %}
+
+    {% include Constants.payoffs_template with stakes=ex_stakes.0 payoffs=ex_stakes.1 is_ex=True rand_ex=rand_ex %}
 
 {% endblock %}

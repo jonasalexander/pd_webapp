@@ -3,36 +3,68 @@
 <div class="card bg-light m-3">
     <div class="card-body">
 
+    {% if is_ex %}
+        <style type="text/css" media="screen">
+            .example .r{{rand_ex.0}} {background-color:rgba(255,200,0,0.35)}
+            .example .c{{rand_ex.1}} {background-color:rgba(255,200,0,0.35)}
+            .example .r{{rand_ex.0}}.c{{rand_ex.1}} {background-color:rgba(255,200,0,1)}
+        </style>
+    {% endif %}
+
     <link rel="stylesheet" type="text/css"
           href="{% static 'global/matrix.css' %}"/>
 
-    <h3> {{ stakes|title }} Stakes Game</h3>
+    {% if is_ex %}
 
-    <p><i>In each cell, the amount to the left is the payoff for
-        you and to the right for the other participant.</i></p>
+        <h3> Example Game ({{ stakes|title }} Stakes) </h3>
 
-    <table class='table table-bordered text-center'
+        <p>How exactly does this work? Suppose you chose {% if rand_ex.0|stringformat:"s" == "0" %} "Cooperate" 
+            {% else %} "Defect" {% endif %}. Then you would look in the <b>row</b> labeled 
+            {% if rand_ex.0|stringformat:"s" == "0" %} "Cooperate" {% else %} "Defect" {% endif %}, which is 
+            highlighted here. If at the same time the other participant chose to 
+            {% if rand_ex.1|stringformat:"s" == "0" %} "Cooperate" {% else %} "Defect" {% endif %} you would 
+            look in the <b>column</b> labeled {% if rand_ex.1|stringformat:"s" == "0" %} "Cooperate" 
+            {% else %} "Defect" {% endif %} which is also highlighted.
+        </p><p>
+            The intersection of the <b>row</b> with <b>your choice</b> (in this example 
+            {% if rand_ex.0|stringformat:"s" == "0" %} "Cooperate" {% else %} "Defect" {% endif %}) and 
+            <b>column</b> with <b>the other participant's choice</b> (in this example 
+            {% if rand_ex.1|stringformat:"s" == "0" %} "Cooperate" {% else %} "Defect" {% endif %})
+            has the payoffs for that outcome. <b>Your payoffs</b> are listed
+            <b>first</b> and the other participant's are given after the comma.
+        </p>
+
+    {% else %}
+
+        <h3> {{ stakes|title }} Stakes Game</h3>
+
+        <p><i>In each cell, the amount to the left is the payoff for
+            you and to the right for the other participant.</i></p>
+
+    {% endif %}
+
+    <table class='table table-bordered text-center {% if is_ex %}example{% endif %}'
            style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
             <th colspan=2>The Other Participant</th>
         </tr>
         <tr>
-            <th>Cooperate</th>
-            <th>Defect</th>
+            <th class="c0">Cooperate</th>
+            <th class="c1">Defect</th>
         </tr>
         <tr>
             <th rowspan="2" style="vertical-align: middle;"><span>You</span></th>
-            <th>Cooperate</th>
-            <td>{{payoffs.both_cooperate}}, {{payoffs.both_cooperate}}</td>
-            <td>{{payoffs.betrayed}}, {{payoffs.betray}}</td>
+            <th class="r0">Cooperate</th>
+            <td class="r0 c0">{{payoffs.both_cooperate}}, {{payoffs.both_cooperate}}</td>
+            <td class="r0 c1">{{payoffs.betrayed}}, {{payoffs.betray}}</td>
         </tr>
         <tr>
-            <th>Defect</th>
-                <td>{{payoffs.betray}}, {{payoffs.betrayed}}</td>
-                <td>{{payoffs.both_defect}}, {{payoffs.both_defect}}</td>
+            <th class="r1">Defect</th>
+            <td class="r1 c0">{{payoffs.betray}}, {{payoffs.betrayed}}</td>
+            <td class="r1 c1">{{payoffs.both_defect}}, {{payoffs.both_defect}}</td>
         </tr>
     </table>
 
-</div>
+    </div>
 </div>

@@ -10,7 +10,7 @@
     <p>Please read the information below carefully. You will be asked questions
     about it on the next page.</p>
 
-    {% include Constants.instructions_template with all_stakes=all_stakes %}
+    {% include Constants.instructions_template with all_stakes=all_stakes rand_ex=rand_ex ex_stakes=ex_stakes%}
     
     {% next_button %}
 

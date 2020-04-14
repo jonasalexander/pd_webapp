@@ -56,6 +56,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     captcha = models.StringField(blank=True) # tbh not sure why I need this
     num_failures = models.IntegerField(initial=0)
+    validation_rand_ex = models.StringField(blank=True)
 
     compr_q1 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q1_opts, len(Constants.compr_q1_opts))],

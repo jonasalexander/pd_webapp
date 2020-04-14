@@ -2,7 +2,8 @@ from ._builtin import Page, WaitPage
 from otree.api import Currency as c, currency_range
 from .models import Constants
 from captcha.fields import ReCaptchaField
-
+from random import randint
+from json import loads, dumps
 
 class Validation(Page):
     __allow_custom_attributes = True
@@ -21,8 +22,11 @@ class Introduction(Page):
     # timeout_seconds = 100 TODO: Do we want this? on summary too? other instructions
 
     def vars_for_template(self):
+        rand_ex = (randint(0, 1), randint(0, 1))
+        self.player.validation_rand_ex = dumps(rand_ex)
+        ex_stakes=[Constants.default_stakes, Constants.payoffs[Constants.default_stakes]]
         all_stakes=[[k, Constants.payoffs[k]] for k in Constants.payoffs.keys()]
-        return dict(all_stakes=all_stakes)
+        return dict(all_stakes=all_stakes, rand_ex=rand_ex, ex_stakes=ex_stakes)
 
 
 class ComprehensionCheck(Page):
@@ -40,8 +44,9 @@ class ComprehensionCheck(Page):
             return "One or more answers incorrect"
 
     def vars_for_template(self):
+        rand_ex = loads(self.player.validation_rand_ex)
+        ex_stakes=[Constants.default_stakes, Constants.payoffs[Constants.default_stakes]]
         all_stakes=[[k, Constants.payoffs[k]] for k in Constants.payoffs.keys()]
-        return dict(all_stakes=all_stakes)
-
+        return dict(all_stakes=all_stakes, rand_ex=rand_ex, ex_stakes=ex_stakes)
 
 page_sequence = [Validation, Summary, Introduction, ComprehensionCheck]
