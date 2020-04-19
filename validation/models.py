@@ -58,6 +58,14 @@ class Player(BasePlayer):
     num_failures = models.IntegerField(initial=0)
     validation_rand_ex = models.StringField(blank=True)
 
+    consent = models.BooleanField(
+        blank=False,
+        widget=widgets.CheckboxInput,
+        label="""I agree that I have read the description of this study,
+            my questions have been answered via email,
+            and I give my consent to participate"""
+    )
+
     compr_q1 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q1_opts, len(Constants.compr_q1_opts))],
         label='What are the two types of games you will play?',

@@ -15,6 +15,10 @@ class Validation(Page):
         frm.fields['captcha'] = ReCaptchaField()
         return frm
 
+class Welcome_Consent(Page):
+    form_model = 'player'
+    form_fields = ['consent']
+
 class Summary(Page):
     pass
 
@@ -49,4 +53,4 @@ class ComprehensionCheck(Page):
         all_stakes=[[k, Constants.payoffs[k]] for k in Constants.payoffs.keys()]
         return dict(all_stakes=all_stakes, rand_ex=rand_ex, ex_stakes=ex_stakes)
 
-page_sequence = [Validation, Summary, Introduction, ComprehensionCheck]
+page_sequence = [Validation, Welcome_Consent, Summary, Introduction, ComprehensionCheck]
