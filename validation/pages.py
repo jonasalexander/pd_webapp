@@ -15,12 +15,12 @@ class Validation(Page):
         frm.fields['captcha'] = ReCaptchaField()
         return frm
 
-class Welcome_Consent(Page):
+class Welcome(Page):
+    pass
+
+class Consent(Page):
     form_model = 'player'
     form_fields = ['consent']
-
-class Summary(Page):
-    pass
 
 class Introduction(Page):
     # timeout_seconds = 100 TODO: Do we want this? on summary too? other instructions
@@ -53,4 +53,4 @@ class ComprehensionCheck(Page):
         all_stakes=[[k, Constants.payoffs[k]] for k in Constants.payoffs.keys()]
         return dict(all_stakes=all_stakes, rand_ex=rand_ex, ex_stakes=ex_stakes)
 
-page_sequence = [Validation, Welcome_Consent, Summary, Introduction, ComprehensionCheck]
+page_sequence = [Validation, Consent, Welcome, Introduction, ComprehensionCheck]

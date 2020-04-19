@@ -61,7 +61,8 @@ class Player(BasePlayer):
     consent = models.BooleanField(
         blank=False,
         widget=widgets.CheckboxInput,
-        label="""I agree that I have read the description of this study,
+        label="""By marking this checkbox, 
+            I agree that I have read the description of this study,
             my questions have been answered via email,
             and I give my consent to participate"""
     )

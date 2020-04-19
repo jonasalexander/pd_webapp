@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+
+    <p>Please read the information below carefully. You will be asked questions
+    about it in a minute.</p>
+
+    <div class="card bg-light m-3">
+        <div class="card-body">
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'global/matrix.css' %}"/>
+
+        <ul>
+            <li>You will be matched with another worker who is also taking this HIT at the same time.</li>
+            <li>You will interact in real-time with this worker.</li>
+            <li>There will be many interactive rounds with the same worker.</li>
+            <li>The decisions you and the other worker make will affect your bonus payment.</li>
+        </ul>
+        <p>
+            Depending on the decisions you and the other worker make, you can earn a bonus 
+            between $0.00 and $TODO. However, you must <strong>stay on task at all times,</strong>
+            otherwise you will automatically be disconnected and earn $0.00. On some pages, you will
+            see a timer running down. The timer is set generously, so no need to rush. But if the
+            timer does run out, you will be disconnected and earn $0.00.
+        </p>
+
+        </div>
+    </div>
+
+    {% next_button %}
+
+{% endblock %}
+

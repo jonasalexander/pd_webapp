@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Consent
+{% endblock %}
+
+{% block content %}
+
+    <div class="card bg-light m-3">
+        <div class="card-body">
+            <p>
+                Welcome to this HIT, which is a student project on decision making.
+                In this study, you will interact anonymously with others via the computer. 
+                You will be faced with a series of decision-making situations.  
+                Your participation in this study will take at most 20 minutes.  
+                If you have any questions about the study, they will be answered 
+                for you via email at jonasnelle@college.harvard.edu.
+            </p>
+
+            <p>
+                TODO copy over from google form when payoffs known
+            </p>
+        </div>
+    </div>
+
+    {% formfields %}
+
+    <div style="margin: 20px"></div>
+
+    {% next_button %}
+
+{% endblock %}
