@@ -28,24 +28,14 @@ class Constants(BaseConstants):
     payoffs_template = 'validation/payoffs.html'
     instructions_template = 'validation/instructions.html'
 
-    default_stakes = p.default_stakes
-
     payoffs = p.payoffs
-
-    compr_q1_opts = ['High and low stakes', 'Multi- and single-player', 'Simple and complicated', 'Short and long']
 
     compr_q2_opts = ['50%', '0%', '100%']
     compr_q3_opts = ['50%', '0%', '100%']
 
-    compr_q4_opts = ['The next round is the low, not high stakes version', 'I lose, the game is over', 
-        'The next round is the single, not multi-player version', 'The next round is the long, not short version',
-        'The next round is the high, not low stakes version']
-
-    compr_q5_opts = ['If I and the other worker both choose to cooperate', 'Wait 3 rounds and it happens automatically',
-    'Trick question, there are no low and high stakes versions']
-
-    compr_q6_opts = ['I get 200, the other worker gets 200 points', 'I get 300, the other worker gets 0 points', 
+    compr_q6_opts = ['I get 200, the other worker gets 200 points', 'I get 300, the other worker gets 0 points',
     'I get 200, the other worker gets 300 points', 'I get 0, the other worker gets 200 points']
+
 
 class Subsession(BaseSubsession):
     pass
@@ -67,12 +57,6 @@ class Player(BasePlayer):
             and I give my consent to participate"""
     )
 
-    compr_q1 = models.StringField(
-        choices=[[a]*2 for a in sample(Constants.compr_q1_opts, len(Constants.compr_q1_opts))],
-        label='What are the two types of games you will play?',
-        widget=widgets.RadioSelect
-    )
-
     compr_q2 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q2_opts, len(Constants.compr_q2_opts))],
         label='What is the chance that there will be another round after the 20th round?',
@@ -85,20 +69,9 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    compr_q4 = models.StringField(
-        choices=[[a]*2 for a in sample(Constants.compr_q4_opts, len(Constants.compr_q4_opts))],
-        label='What happens if you or the other worker chooses to defect?',
-        widget=widgets.RadioSelect
-    )
-
-    compr_q5 = models.StringField(
-        choices=[[a]*2 for a in sample(Constants.compr_q5_opts, len(Constants.compr_q5_opts))],
-        label='How do you get from the low stakes game back into the high stakes version?',
-        widget=widgets.RadioSelect
-    )
-
     compr_q6 = models.StringField(
         choices=[[a]*2 for a in sample(Constants.compr_q6_opts, len(Constants.compr_q6_opts))],
-        label='If you and the other worker are playing the high stakes version and both choose to cooperate, what are your rewards?',
+        label='If you and the other worker both choose to cooperate, what are your rewards?',
         widget=widgets.RadioSelect
     )
+
