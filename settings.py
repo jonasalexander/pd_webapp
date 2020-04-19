@@ -6,7 +6,7 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01, participation_fee=0.00, doc="",
+    real_world_currency_per_point=0.01, participation_fee=1.00, doc="",
     mturk_hit_settings=dict(
         keywords='bonus, study',
         title='Repeated PD with changing stakes based on past behavior',
