@@ -44,8 +44,11 @@ class Constants(BaseConstants):
     compr_q5_opts = ['If I and the other worker both choose to cooperate', 'Wait 3 rounds and it happens automatically',
     'Trick question, there are no low and high stakes versions']
 
-    compr_q6_opts = ['I get 200, the other worker gets 200 points', 'I get 300, the other worker gets 0 points', 
-    'I get 200, the other worker gets 300 points', 'I get 0, the other worker gets 200 points']
+    p1 = payoffs["high"]
+    compr_q6_opts = ['I get {0}, the other worker gets {0}'.format(p1.both_cooperate),
+    'I get {0}, the other worker gets {1}'.format(p1.betray, p1.betrayed),
+    'I get {0}, the other worker gets {1}'.format(p1.betray, p1.both_cooperate),
+    'I get {0}, the other worker gets {0}'.format(p1.both_defect)]
 
 class Subsession(BaseSubsession):
     pass
