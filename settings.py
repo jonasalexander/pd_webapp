@@ -9,8 +9,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.01, participation_fee=1.00, doc="",
     mturk_hit_settings=dict(
         keywords='bonus, study',
-        title='Repeated PD with changing stakes based on past behavior',
-        description='Play PD 20+ times with the same partner, with low stakes if someone defected in the last round, else high stakes. Start with high stakes.',
+        title='Fun Short Psychology Experiment!!',
         frame_height=500,
         template='global/mturk_template.html',
         minutes_allotted_per_assignment=60,
@@ -18,10 +17,10 @@ SESSION_CONFIG_DEFAULTS = dict(
         qualification_requirements=[{'QualificationTypeId': "00000000000000000071",
                                     'Comparator': "EqualTo",
                                     'LocaleValues': [{'Country': "US"}]},]
-                                    #{'QualificationTypeId': "YOUR_QUALIFICATION_ID_HERE",
-                                    #'Comparator': "DoesNotExist", 
-                                    #'ActionsGuarded': "PreviewAndAccept"}]
-        #grant_qualification_id='YOUR_QUALIFICATION_ID_HERE', # to prevent retakes
+                                    {'QualificationTypeId': "31QSV3JE5UODL7PQ9U5WGT4QZZMOX7",
+                                    'Comparator': "DoesNotExist",
+                                    'ActionsGuarded': "PreviewAndAccept"}]
+        grant_qualification_id='31QSV3JE5UODL7PQ9U5WGT4QZZMOX7', # to prevent retakes
     )
 )
 
