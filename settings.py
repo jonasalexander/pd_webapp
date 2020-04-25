@@ -6,7 +6,7 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01, participation_fee=1.00, doc="",
+    participation_fee=1.00, doc="",
     mturk_hit_settings=dict(
         keywords='bonus, study',
         title='Fun Short Psychology Experiment!!',
@@ -41,7 +41,7 @@ LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+USE_POINTS = False
 
 ROOMS = [
     dict(name='pd_stakes',
