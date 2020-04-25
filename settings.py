@@ -10,6 +10,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     mturk_hit_settings=dict(
         keywords='bonus, study',
         title='Fun Short Psychology Experiment!!',
+        description='Student psychology project',
         frame_height=500,
         template='global/mturk_template.html',
         minutes_allotted_per_assignment=60,
