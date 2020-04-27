@@ -7,7 +7,7 @@ class Payoffs():
         self.both_cooperate = c(both_cooperate)
         self.both_defect = c(both_defect)
 
-payoffs = {"high": Payoffs(betray=c(0.20), betrayed=c(0.00), both_cooperate=c(0.12), both_defect=c(0.04)),
-            "low": Payoffs(betray=c(0.05), betrayed=c(0.00), both_cooperate=c(0.03), both_defect=c(0.01))}
+payoffs = {"high": Payoffs(betray=c(0.35), betrayed=c(0.05), both_cooperate=c(0.25), both_defect=c(0.15)),
+            "low": Payoffs(betray=c(0.27), betrayed=c(0.05), both_cooperate=c(0.17), both_defect=c(0.15))}
 
 default_stakes = "high"
