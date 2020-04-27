@@ -17,8 +17,8 @@ SESSION_CONFIG_DEFAULTS = dict(
         expiration_hours=7 * 24,
         qualification_requirements=[{'QualificationTypeId': "00000000000000000071",
                                     'Comparator': "EqualTo",
-                                    'LocaleValues': [{'Country': "US"}],
-                                    'QualificationTypeId': "31QSV3JE5UODL7PQ9U5WGT4QZZMOX7",
+                                    'LocaleValues': [{'Country': "US"}]},
+                                    {'QualificationTypeId': "31QSV3JE5UODL7PQ9U5WGT4QZZMOX7",
                                     'Comparator': "DoesNotExist",
                                     'ActionsGuarded': "PreviewAndAccept"}],
         grant_qualification_id='31QSV3JE5UODL7PQ9U5WGT4QZZMOX7', # to prevent retakes
