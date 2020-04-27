@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     education_options = ['No formal education', 'High school diploma', 'College degree', 'Vocational training',
         'Bachelor\'s degree', 'Master\'s degree', 'Professional degree', 'Doctorate degree', 'Other']
     pd_familiarity_options = ['I had never heard of it', 'That phrase seems familiar, but I didn\'t really know what it is',
-        'I knew what it is', 'I had played it before, but rarely (less than 5)', 'I had played it before, a few times (5-10)',
+        'I knew what it is', 'I had played it before, but rarely (fewer than 5 times)', 'I had played it before, a few times (5-10)',
         'I had played it before, many times (11+)']
 
     english_native_language_options = ['Yes', 'No']

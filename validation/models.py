@@ -33,8 +33,10 @@ class Constants(BaseConstants):
     compr_q2_opts = ['50%', '0%', '100%']
     compr_q3_opts = ['50%', '0%', '100%']
 
-    compr_q6_opts = ['I get 200, the other worker gets 200 points', 'I get 300, the other worker gets 0 points',
-    'I get 200, the other worker gets 300 points', 'I get 0, the other worker gets 200 points']
+    compr_q6_opts = ['I get {0}, the other worker gets {0}'.format(payoffs.both_cooperate),
+    'I get {0}, the other worker gets {1}'.format(payoffs.betray, payoffs.betrayed),
+    'I get {0}, the other worker gets {1}'.format(payoffs.betray, payoffs.both_cooperate),
+    'I get {0}, the other worker gets {0}'.format(payoffs.both_defect)]
 
 
 class Subsession(BaseSubsession):

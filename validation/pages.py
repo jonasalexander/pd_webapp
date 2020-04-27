@@ -23,7 +23,6 @@ class Consent(Page):
     form_fields = ['consent']
 
 class Introduction(Page):
-    # timeout_seconds = 100 TODO: Do we want this? on summary too? other instructions
 
     def vars_for_template(self):
         rand_ex = (randint(0, 1), randint(0, 1))

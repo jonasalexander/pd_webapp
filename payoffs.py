@@ -7,4 +7,4 @@ class Payoffs():
         self.both_cooperate = c(both_cooperate)
         self.both_defect = c(both_defect)
 
-payoffs = Payoffs(betray=c(300), betrayed=c(0), both_cooperate=c(200), both_defect=c(100))
+payoffs = Payoffs(betray=c(0.35), betrayed=c(0.05), both_cooperate=c(0.25), both_defect=c(0.15))

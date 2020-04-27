@@ -6,22 +6,22 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01, participation_fee=1.00, doc="",
+    participation_fee=1.00, doc="",
     mturk_hit_settings=dict(
         keywords='bonus, study',
-        title='Repeated PD with changing stakes based on past behavior',
-        description='Play PD 20+ times with the same partner, with low stakes if someone defected in the last round, else high stakes. Start with high stakes.',
+        title='Fun Short Psychology Experiment!!',
+        description='Student psychology project',
         frame_height=500,
         template='global/mturk_template.html',
         minutes_allotted_per_assignment=60,
         expiration_hours=7 * 24,
         qualification_requirements=[{'QualificationTypeId': "00000000000000000071",
                                     'Comparator': "EqualTo",
-                                    'LocaleValues': [{'Country': "US"}]},]
-                                    #{'QualificationTypeId': "YOUR_QUALIFICATION_ID_HERE",
-                                    #'Comparator': "DoesNotExist", 
-                                    #'ActionsGuarded': "PreviewAndAccept"}]
-        #grant_qualification_id='YOUR_QUALIFICATION_ID_HERE', # to prevent retakes
+                                    'LocaleValues': [{'Country': "US"}]},
+                                    {'QualificationTypeId': "31QSV3JE5UODL7PQ9U5WGT4QZZMOX7",
+                                    'Comparator': "DoesNotExist",
+                                    'ActionsGuarded': "PreviewAndAccept"}],
+        grant_qualification_id='31QSV3JE5UODL7PQ9U5WGT4QZZMOX7', # to prevent retakes
     )
 )
 
@@ -41,7 +41,7 @@ LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+USE_POINTS = False
 
 ROOMS = [
     dict(name='pd_stakes',
