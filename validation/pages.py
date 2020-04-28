@@ -16,11 +16,15 @@ class Validation(Page):
         return frm
 
 class Welcome(Page):
-    pass
+    def vars_for_template(self):
+        return dict(max_bonus=Constants.max_bonus, min_bonus=Constants.min_bonus, participation_fee=self.session.config['participation_fee'])
 
 class Consent(Page):
     form_model = 'player'
     form_fields = ['consent']
+
+    def vars_for_template(self):
+        return dict(max_bonus=Constants.max_bonus, min_bonus=Constants.min_bonus, participation_fee=self.session.config['participation_fee'])
 
 class Introduction(Page):
 
