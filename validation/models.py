@@ -29,8 +29,8 @@ class Constants(BaseConstants):
     instructions_template = 'validation/instructions.html'
 
     payoffs = p.payoffs
-    max_bonus = 25*payoffs["high"].both_cooperate
-    min_bonus = 20*payoffs["low"].betrayed
+    max_bonus = 25*payoffs.both_cooperate
+    min_bonus = 20*payoffs.betrayed
 
     compr_q2_opts = ['50%', '0%', '100%']
     compr_q3_opts = ['50%', '0%', '100%']
