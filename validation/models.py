@@ -31,6 +31,8 @@ class Constants(BaseConstants):
     default_stakes = p.default_stakes
 
     payoffs = p.payoffs
+    max_bonus = 25*payoffs["high"].both_cooperate
+    min_bonus = 20*payoffs["low"].betrayed
 
     compr_q1_opts = ['High and low stakes', 'Multi- and single-player', 'Simple and complicated', 'Short and long']
 
@@ -51,7 +53,10 @@ class Constants(BaseConstants):
     'I get {0}, the other worker gets {0}'.format(p1.both_defect)]
 
 class Subsession(BaseSubsession):
-    pass
+    if isinstance(Constants.payoffs, dict):
+        payoffs = models.StringField(initial=str([(k, str(v)) for k, v in Constants.payoffs.items()]))
+    else:
+        payoffs = models.StringField(initial=str(Constants.payoffs))
 
 class Group(BaseGroup):
     pass
