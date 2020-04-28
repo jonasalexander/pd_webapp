@@ -10,4 +10,7 @@ class Payoffs():
     def __str__(self):
         return f"betray: {self.betray}, betrayed: {self.betrayed}, both_cooperate: {self.both_cooperate}, both_defect: {self.both_defect}"
 
-payoffs = Payoffs(betray=c(0.35), betrayed=c(0.05), both_cooperate=c(0.25), both_defect=c(0.15))
+payoffs = {"high": Payoffs(betray=c(0.35), betrayed=c(0.05), both_cooperate=c(0.25), both_defect=c(0.15)),
+            "low": Payoffs(betray=c(0.27), betrayed=c(0.05), both_cooperate=c(0.17), both_defect=c(0.15))}
+
+default_stakes = "high"

@@ -16,7 +16,7 @@
 
     {% if is_ex %}
 
-        <h3> Example </h3>
+        <h3> Example Game ({{ stakes|title }} Stakes) </h3>
 
         <p>How exactly does this work? Suppose you chose {% if rand_ex.0|stringformat:"s" == "0" %} "Cooperate" 
             {% else %} "Defect" {% endif %}. Then you would look in the <b>row</b> labeled 
@@ -36,7 +36,7 @@
 
     {% else %}
 
-        <h3> Game Description </h3>
+        <h3> {{ stakes|title }} Stakes Game</h3>
 
         <p><i>In each cell, the amount to the left is the payoff for
             you and to the right for the other participant.</i></p>

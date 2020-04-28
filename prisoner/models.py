@@ -15,8 +15,10 @@ import payoffs as p
 from numpy.random import geometric
 
 doc = """
-This is a repeated "Prisoner's Dilemma". Two players are
-asked separately whether they want to cooperate or defect."""
+This is a repeated "Prisoner's Dilemma" with varying stakes. Two players are 
+asked separately whether they want to cooperate or defect. Their choices 
+directly determine the payoffs as well as the stakes for the next round.
+"""
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
@@ -26,8 +28,21 @@ class Constants(BaseConstants):
 
     payoffs = p.payoffs
 
+    default_stakes = p.default_stakes
+
+
 class Subsession(BaseSubsession):
-    pass
+    stakes = models.StringField(initial=Constants.default_stakes)
+
+    def set_stakes(self):
+        if self.round_number == 1:
+            pass
+        else:
+            self.stakes = "high"
+            for p in self.get_players():
+                if p.in_round(self.round_number - 1).decision == "Defect":
+                    self.stakes = "low"
+
 
 class Group(BaseGroup):
 
@@ -37,6 +52,7 @@ class Group(BaseGroup):
             # -1 because of geometric vs first success definition
 
         self.session.vars['timed_out'] = False
+
 
     def set_payoffs(self):
         if not self.session.vars['timed_out']:
@@ -56,12 +72,11 @@ class Player(BasePlayer):
     def set_payoff(self):
         payoff_matrix = dict(
             Cooperate=dict(
-                Cooperate=Constants.payoffs.both_cooperate,
-                Defect=Constants.payoffs.betrayed,
+                Cooperate=Constants.payoffs[self.subsession.stakes].both_cooperate,
+                Defect=Constants.payoffs[self.subsession.stakes].betrayed,
             ),
             Defect=dict(
-                Cooperate=Constants.payoffs.betray, 
-                Defect=Constants.payoffs.both_defect
+                Cooperate=Constants.payoffs[self.subsession.stakes].betray, Defect=Constants.payoffs[self.subsession.stakes].both_defect
             ),
         )
 
