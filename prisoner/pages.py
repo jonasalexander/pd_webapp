@@ -15,10 +15,12 @@ class LimitedTimePage(Page):
 
 
 class PairingWaitPage(WaitPage):
-    title_text = "Please Wait"
-    body_text = "You're all set to complete the HIT! Waiting to pair you with the next available participant..."
+    template_name = 'prisoner/PairingWaitPage.html'
 
     group_by_arrival_time = True
+
+    def vars_for_template(self):
+        return dict(title_text="Please Wait", body_text="You're all set to complete the HIT! Waiting to pair you with the next available participant...", participant_code=self.participant.code+"WPTO")
 
     def is_displayed(self):
         return self.round_number == 1

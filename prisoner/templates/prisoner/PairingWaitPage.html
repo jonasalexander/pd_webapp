@@ -1,0 +1,17 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree %}
+{% block title %}{{ title_text }}{% endblock %}
+{% block content %}
+    {{ body_text }}
+    <script type="text/javascript">
+        onload = function(){
+            setTimeout(
+                function(){
+                    var leave = window.confirm("Thanks for waiting. Unfortunately, we don't currently have enough participants to pair you up at this moment. You may now proceed back to mturk and submit the following completion code to receive your participation fee: {{participant_code}}. If you wish, you may also click 'Cancel' if you wish to stay and wait until the next participant arrives.");
+                    console.log(leave);
+                },
+                600000
+            );
+        }
+    </script>
+{% endblock %}
