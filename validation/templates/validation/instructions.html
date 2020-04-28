@@ -20,17 +20,6 @@
         those of the worker you've been paired with. You will only be able to see
         the other worker's decision after you have submitted yours.</p>
 
-        <p> Furthermore, each round can be either <strong>High</strong> or 
-        <strong>Low</strong> stakes. In the high stakes version, the bonus payoffs 
-        are considerably higher (see below for exact numbers).</p>
-
-        <p>In the first round, you will start off in the {{Constants.default_stakes}}
-        stakes game. In each subsequent round, you will play the high stakes game
-        if you both chose to cooperate in the previous round. Otherwise you will 
-        play the low stakes version. In other words, if one of you chose to defect
-        in the previous round, you will play the low stakes version in the
-        next round.</p>
-
         <p>There will be at least 20 rounds of the paired task. After the 20th
         round, there will be a 50% chance that another round will follow. After
         that round, there will again be a 50% chance that another round will follow,
@@ -40,10 +29,8 @@
         </div>
     </div>
 
-    {% for stake in all_stakes %}
-        {% include Constants.payoffs_template with stakes=stake.0 payoffs=stake.1 is_ex=False rand_ex=rand_ex %}
-    {% endfor %}
+    {% include Constants.payoffs_template with payoffs=all_stakes is_ex=False rand_ex=rand_ex %}
 
-    {% include Constants.payoffs_template with stakes=ex_stakes.0 payoffs=ex_stakes.1 is_ex=True rand_ex=rand_ex %}
+    {% include Constants.payoffs_template with payoffs=ex_stakes is_ex=True rand_ex=rand_ex %}
 
 {% endblock %}
