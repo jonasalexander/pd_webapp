@@ -31,7 +31,9 @@ class Decision(LimitedTimePage):
     form_fields = ['decision']
 
     def vars_for_template(self):
-        return dict(payoffs=Constants.payoffs)
+        self.subsession.set_stakes()
+        return dict(stakes=self.subsession.stakes,
+            payoffs=Constants.payoffs[self.subsession.stakes])
 
 
 class ResultsWaitPage(WaitPage):
@@ -46,6 +48,8 @@ class Results(LimitedTimePage):
     def vars_for_template(self):
         me = self.player
         opponent = me.other_player()
+
+        next_stakes = "high" if "Defect" not in [me.decision, opponent.decision] else "low"
 
         last_round = self.round_number == self.session.vars["num_rounds"]
 
@@ -63,6 +67,7 @@ class Results(LimitedTimePage):
             my_decision=me.decision,
             opponent_decision=opponent.decision,
             same_choice=me.decision == opponent.decision,
+            next_stakes=next_stakes,
             last_round=last_round,
             num_rounds=self.session.vars["num_rounds"],
             round_str=round_str,
