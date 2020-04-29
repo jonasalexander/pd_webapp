@@ -1,0 +1,16 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree %}
+{% block title %}{{ title_text }}{% endblock %}
+{% block content %}
+    {{ body_text }}
+    <script type="text/javascript">
+        onload = function(){
+            setInterval(
+                function(){
+                    window.alert("Thanks for waiting. Unfortunately, we don't have enough participants to pair you up at this moment. You may now proceed back to mturk and submit the following completion code to receive your participation fee: {{participant_code}}. If you wish, you may also continue to wait until the next participant arrives and potentially earn a bonus. This alert will show up again in 10 minutes.");
+                },
+                600000
+            );
+        }
+    </script>
+{% endblock %}

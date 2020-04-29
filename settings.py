@@ -9,7 +9,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     participation_fee=1.00, doc="",
     mturk_hit_settings=dict(
         keywords='bonus, study',
-        title='Fun Short Psychology Experiment!!',
+        title='Fun Short Psychology Experiment!! (~10-20 minutes, up to $6 bonus)',
         description='Student psychology project',
         frame_height=500,
         template='global/mturk_template.html',
