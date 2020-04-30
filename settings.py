@@ -45,7 +45,7 @@ USE_POINTS = False
 
 ROOMS = [
     dict(name='pd_stakes',
-	display_name='Repeated PD with changing stakes based on past behavior')
+	display_name='Control- repeated PD')
 ]
 
 ADMIN_USERNAME = 'admin'
